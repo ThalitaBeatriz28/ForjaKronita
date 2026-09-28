@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Metal+Mania&display=swap');
+ 
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
 :root{
     --color-primary: #a259e6;
     --bg-dark: #120c08;
@@ -8,82 +13,132 @@
     --gold: #c9a35c;
     --linear-bg: linear-gradient(to right, #e8871e, #a259e6);
 }
-
+ 
+/* =========================================================
+   BASE
+   ========================================================= */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+ 
+html{
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;   /* o título da seção não fica escondido atrás do header */
+}
+ 
 body{
     background: var(--bg-dark);
     color: var(--text-color);
     font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
 }
-
+ 
+img,
+svg{
+    max-width: 100%;
+}
+ 
+a:focus-visible,
+button:focus-visible{
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+ 
+/* =========================================================
+   HEADER
+   ========================================================= */
 header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
+    padding: 12px 5%;
     background: var(--header-bg);
     border-bottom: 3px solid var(--gold);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
-
+ 
 .logo{
     display: flex;
     align-items: center;
     gap: 15px;
 }
-
+ 
 .logo-icone{
-    width: 105px;
-    height: 105px;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
-
+ 
 .logo h1{
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Cinzel', serif;
     font-size: 1.7rem;
     letter-spacing: 1px;
 }
-
+ 
 .logo span{
     color: var(--btn-color);
 }
-
+ 
 .logo:hover h1{
     animation: acender 0.5s forwards;
 }
-
+ 
 @keyframes acender{
     to{
         text-shadow:
-        0 0 10px var(--btn-color),
-        0 0 20px var(--gold);
+            0 0 10px var(--btn-color),
+            0 0 20px var(--gold);
     }
 }
-
+ 
 nav ul{
+    font-family: 'Cinzel', serif;
     display: flex;
     list-style: none;
     align-items: center;
 }
-
+ 
 nav ul li{
     padding: 10px 18px;
 }
-
+ 
 nav ul li a{
+    position: relative;
     text-decoration: none;
     color: var(--text-color);
     letter-spacing: 1px;
     font-weight: 600;
+    transition: color 0.2s;
 }
-
+ 
+/* linha dourada que cresce embaixo do link */
+nav ul li a::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: var(--btn-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s;
+}
+ 
 nav ul li a:hover{
     color: var(--btn-color);
 }
-
+ 
+nav ul li a:hover::after{
+    transform: scaleX(1);
+}
+ 
 .menu-hamburguer{
     display: none;
     flex-direction: column;
@@ -92,60 +147,336 @@ nav ul li a:hover{
     height: 25px;
     cursor: pointer;
 }
-
+ 
 .menu-hamburguer span{
     width: 100%;
     height: 3px;
     background: var(--btn-color);
     border-radius: 10px;
+    transition: transform 0.25s, opacity 0.25s;
 }
-
-/* SOBRE */
+ 
+.open span:nth-child(1){ transform: rotate(45deg) translate(5px, 5px); }
+.open span:nth-child(2){ opacity: 0; }
+.open span:nth-child(3){ transform: rotate(-45deg) translate(7px, -7px); }
+ 
+/* =========================================================
+   TÍTULOS DAS SEÇÕES
+   ========================================================= */
+.sobre h2,
+.produtos h2{
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+ 
+.produtos h2{
+    font-family: 'Cinzel', serif;
+}
+ 
+/* fio dourado embaixo de cada título */
+.sobre h2::after,
+.produtos h2::after{
+    content: "";
+    display: block;
+    width: 90px;
+    height: 3px;
+    margin: 14px auto 0;
+    background: var(--linear-bg);
+    border-radius: 3px;
+}
+ 
+/* =========================================================
+   SOBRE COM FOGO DE FUNDO
+   HTML esperado:
+   <section id="sobre" class="sobre-fogo">
+       <svg ...filtro chama...></svg>
+       <canvas id="brasas"></canvas>
+       <div class="fogo" id="fogo"></div>
+       <div class="sobre"> <h2>..</h2> <p>..</p> </div>
+   </section>
+   ========================================================= */
+.sobre-fogo{
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0 300px;   /* espaço embaixo para as chamas */
+    background: linear-gradient(to top, #5c1b07 0, #2b1006 40%, var(--bg-dark) 100%);
+}
+ 
 .sobre{
+    position: relative;
+    z-index: 2;              /* o texto fica na frente do fogo */
+    font-family: 'Metal Mania', cursive;
     padding: 60px 5%;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
     line-height: 1.7;
 }
-
+ 
+.sobre p{
+    font-size: 1.2rem;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+ 
+.sobre h2,
+.sobre p{
+    text-shadow: 0 2px 6px #000, 0 0 16px #000;
+}
+ 
+/* o fogo se dissolve suavemente na cor do fundo da página */
+.sobre-fogo::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    background: linear-gradient(transparent, var(--bg-dark));
+    z-index: 1;
+    pointer-events: none;
+}
+ 
+#brasas{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+ 
+.fogo{
+    position: absolute;
+    left: -3%;
+    right: -3%;
+    bottom: -60px;
+    height: 380px;
+    filter: url(#chama);     /* distorce as chamas para parecerem fogo de verdade */
+    pointer-events: none;
+    z-index: 1;
+}
+ 
+.fogo i{
+    position: absolute;
+    bottom: -70px;
+    border-radius: 50% 50% 45% 45%;
+    background: radial-gradient(ellipse at 50% 85%,
+        #fff3a0 0,
+        #ffb020 24%,
+        var(--btn-color) 52%,
+        #8a2a0c 66%,
+        transparent 74%);
+    transform-origin: 50% 100%;
+    animation: lamber 1.5s ease-in-out infinite alternate;
+}
+ 
+@keyframes lamber{
+    to{ transform: scaleY(1.3) scaleX(0.85); opacity: 0.8; }
+}
+ 
+/* =========================================================
+   PRODUTOS / CARDS
+   ========================================================= */
+.produtos{
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+ 
+.produtos-sub{
+    text-align: center;
+    max-width: 50ch;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+ 
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 26px;
+}
+ 
+.card{
+    --cor: var(--btn-color);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--header-bg);
+    border-top: 4px solid var(--cor);
+    box-shadow: inset 0 0 0 5px var(--bg-dark), inset 0 0 0 6px var(--header-bg);
+    transition: box-shadow 0.25s;
+}
+ 
+.card:hover{
+    box-shadow: inset 0 0 0 5px var(--bg-dark), inset 0 0 0 6px var(--cor);
+}
+ 
+/* cor de cada reino, dentro da sua paleta */
+.card[data-reino="terra"]       { --cor: var(--gold); }
+.card[data-reino="outworld"]    { --cor: var(--color-primary); }
+.card[data-reino="netherrealm"] { --cor: var(--btn-color); }
+ 
+.card-imagem{
+    height: 170px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--cor) 35%, transparent), transparent 70%);
+}
+ 
+.card-imagem svg{
+    width: 110px;
+    height: 110px;
+    fill: none;
+    stroke: var(--text-color);
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    transition: transform 0.3s;
+}
+ 
+.card:hover .card-imagem svg{
+    transform: scale(1.06);
+}
+ 
+/* se usar foto no lugar do svg */
+.card-imagem img{
+    max-width: 80%;
+    max-height: 90%;
+    object-fit: contain;
+}
+ 
+.card-corpo{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    padding: 6px 24px 24px;
+}
+ 
+.card-reino{
+    color: var(--cor);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+ 
+.card-titulo{
+    font-family: 'Cinzel', serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+}
+ 
+.card-descricao{
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+ 
+.card-rodape{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+ 
+.card-preco{
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+ 
+.btn-comprar{
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    background: transparent;
+    border: 2px solid var(--btn-color);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+ 
+.btn-comprar:hover{
+    background: var(--linear-bg);
+    border-color: transparent;
+}
+ 
+.btn-comprar:active{
+    transform: translateY(1px);
+}
+ 
+/* =========================================================
+   FOOTER
+   ========================================================= */
 footer{
     text-align: center;
-    padding: 30px;
+    padding: 30px 5%;
     border-top: 3px solid var(--gold);
+    margin-top: 75px;
+    background: var(--header-bg);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
-
+ 
+/* =========================================================
+   MOBILE
+   ========================================================= */
 @media (max-width: 768px){
+    .logo-icone{
+        width: 60px;
+        height: 60px;
+    }
+ 
+    .logo h1{
+        font-size: 1.3rem;
+    }
+ 
     .menu-hamburguer{
         display: flex;
     }
+ 
     nav{
         display: none;
         position: absolute;
-        top: 90px;
+        top: 100%;           /* logo abaixo do header, seja qual for a altura */
         left: 0;
         width: 100%;
         background: var(--header-bg);
-        flex-direction: column;
+        border-bottom: 3px solid var(--gold);
         padding: 20px 0;
         z-index: 10;
     }
+ 
     nav.active{
         display: block;
     }
+ 
     nav ul{
         flex-direction: column;
         text-align: center;
     }
-    .card-game{
-        width: 150px;
-    }
-    .card-game img{
-        width: 140px;
-        height: 140px;
+ 
+    .sobre h2,
+    .produtos h2{
+        font-size: 1.8rem;
     }
 }
-
-.open span:nth-child(1){ transform: rotate(45deg) translate(5px, 5px); }
-.open span:nth-child(2){ opacity: 0; }
-.open span:nth-child(3){ transform: rotate(-45deg) translate(7px, -7px); }
+ 
+/* =========================================================
+   MENOS MOVIMENTO (acessibilidade)
+   ========================================================= */
+@media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .fogo i,
+    .logo:hover h1{ animation: none; }
+}
+ 

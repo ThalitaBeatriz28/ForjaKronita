@@ -29,16 +29,133 @@
     </header>
 
     <!-- SOBRE -->
-    <section id="sobre" class="sobre">
-        <h2>Sobre a ForjaKronita</h2>
-        <p>
-            Na ForjaKronita, cada peça é forjada com a mesma dedicação de um mestre
-            ferreiro lendário. Trabalhamos com colecionáveis e itens temáticos
-            inspirados em guerreiros, sombras e guardiões de aço, unindo artesanato
-            e paixão por universos épicos.
-        </p>
+     <section id="sobre" class="sobre-fogo">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+            <filter id="chama" x="-20%" y="-30%" width="140%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="4" result="ruido">
+                    <animate attributeName="baseFrequency" dur="7s" values="0.012 0.03;0.017 0.05;0.012 0.03" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="80"/>
+            </filter>
+        </svg>
+        <canvas id="brasas"></canvas>
+        <div class="fogo" id="fogo"></div>
+ 
+        <div class="sobre">
+            <h2>Sobre a ForjaKronita</h2>
+            <p>
+                Na ForjaKronita, cada peça é forjada com a mesma dedicação de um mestre
+                ferreiro lendário. Trabalhamos com colecionáveis e itens temáticos
+                inspirados em guerreiros, sombras e guardiões de aço, unindo artesanato
+                e paixão por universos épicos.
+            </p>
+        </div>
+    </section>
+    
+    <main>
+         <!-- PRODUTOS -->
+    <section id="produtos" class="produtos">
+        <h2>Nossas relíquias</h2>
+        <p class="produtos-sub">Peças forjadas com a dedicação de um mestre ferreiro, direto dos reinos para a sua estante.</p>
+ 
+        <div class="cards">
+ 
+            <article class="card" data-reino="netherrealm">
+                <div class="card-imagem">
+                    <!-- Para usar foto: troque o <svg> por <img src="./src/assets/kunai.png" alt="Kunai do Scorpion"> -->
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 8l16 34-16 34-16-34z"/><path d="M60 76v22"/><circle cx="60" cy="106" r="8"/></svg>
+                </div>
+                <div class="card-corpo">
+                    <span class="card-reino">Netherrealm</span>
+                    <h3 class="card-titulo">Kunai do Scorpion</h3>
+                    <p class="card-descricao">Réplica com corrente. Grite “Get over here!” por sua conta.</p>
+                    <div class="card-rodape">
+                        <span class="card-preco">R$ 189</span>
+                        <button class="btn-comprar" type="button">Comprar</button>
+                    </div>
+                </div>
+            </article>
+ 
+            <article class="card" data-reino="terra">
+                <div class="card-imagem">
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M22 24h76v40c0 28-18 44-38 48-20-4-38-20-38-48z"/><path d="M34 50h20M66 50h20M40 84h40M50 84v14M70 84v14"/></svg>
+                </div>
+                <div class="card-corpo">
+                    <span class="card-reino">Reino da Terra</span>
+                    <h3 class="card-titulo">Máscara do Sub-Zero</h3>
+                    <p class="card-descricao">Gelo eterno do clã Lin Kuei, em resina de alta resistência.</p>
+                    <div class="card-rodape">
+                        <span class="card-preco">R$ 249</span>
+                        <button class="btn-comprar" type="button">Comprar</button>
+                    </div>
+                </div>
+            </article>
+ 
+            <article class="card" data-reino="terra">
+                <div class="card-imagem">
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 12l52 66H8z"/><path d="M28 78c8 14 56 14 64 0"/></svg>
+                </div>
+                <div class="card-corpo">
+                    <span class="card-reino">Reino da Terra</span>
+                    <h3 class="card-titulo">Chapéu do Raiden</h3>
+                    <p class="card-descricao">Chapéu de palha do deus do trovão. Relâmpago não incluso.</p>
+                    <div class="card-rodape">
+                        <span class="card-preco">R$ 139</span>
+                        <button class="btn-comprar" type="button">Comprar</button>
+                    </div>
+                </div>
+            </article>
+ 
+            <article class="card" data-reino="terra">
+                <div class="card-imagem">
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="44"/><circle cx="60" cy="60" r="30"/><path d="M60 34c14 6 18 20 8 30-6 6-2 14 6 16M60 34c-14 6-16 22-6 32"/></svg>
+                </div>
+                <div class="card-corpo">
+                    <span class="card-reino">Reino da Terra</span>
+                    <h3 class="card-titulo">Medalhão do Dragão</h3>
+                    <p class="card-descricao">O símbolo do torneio em metal envelhecido, com corrente.</p>
+                    <div class="card-rodape">
+                        <span class="card-preco">R$ 329</span>
+                        <button class="btn-comprar" type="button">Comprar</button>
+                    </div>
+                </div>
+            </article>
+ 
+            <article class="card" data-reino="outworld">
+                <div class="card-imagem">
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 104L14 40c26-30 66-30 92 0z"/><path d="M60 104L36 30M60 104V22M60 104l24-74"/></svg>
+                </div>
+                <div class="card-corpo">
+                    <span class="card-reino">Outworld</span>
+                    <h3 class="card-titulo">Leques da Kitana</h3>
+                    <p class="card-descricao">Par de leques de aço decorativo, afiados só no visual.</p>
+                    <div class="card-rodape">
+                        <span class="card-preco">R$ 219</span>
+                        <button class="btn-comprar" type="button">Comprar</button>
+                    </div>
+                </div>
+            </article>
+ 
+            <article class="card" data-reino="outworld">
+                <div class="card-imagem">
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M14 52c8-12 24-16 46-16s38 4 46 16c-2 30-22 56-46 56S16 82 14 52z"/><path d="M14 52h92"/><path d="M26 74l6 12 6-12 6 14 6-14 6 14 6-14 6 14 6-14 6 12 6-12"/></svg>
+                </div>
+                <div class="card-corpo">
+                    <span class="card-reino">Outworld</span>
+                    <h3 class="card-titulo">Máscara da Mileena</h3>
+                    <p class="card-descricao">Máscara com dentes afiados da princesa de Outworld. Sorriso não incluso.</p>
+                    <div class="card-rodape">
+                        <span class="card-preco">R$ 279</span>
+                        <button class="btn-comprar" type="button">Comprar</button>
+                    </div>
+                </div>
+            </article>
+ 
+        </div>
     </section>
  
+    </main>
+    
     <footer>
         <p>&copy; 2026 ForjaKronita - Direitos Reservados</p>
     </footer>
