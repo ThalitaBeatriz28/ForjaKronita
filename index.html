@@ -26,6 +26,14 @@
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
+        <button class="carrinho" id="carrinho" type="button" aria-label="Abrir a loja">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 7h12l1 13H5L6 7z"/>
+                <path d="M9 7a3 3 0 0 1 6 0"/>
+            </svg>
+            <span class="carrinho-qtd" id="carrinho-qtd">0</span>
+        </button>
+
     </header>
 
     <!-- SOBRE -->
@@ -44,7 +52,7 @@
                 <feDisplacementMap in="SourceGraphic" in2="r" scale="6"/>
             </filter>
         </svg>
-        
+
         <canvas id="brasas"></canvas>
         <div class="fogo" id="fogo"></div>
  
@@ -165,7 +173,23 @@
     <footer>
         <p>&copy; 2026 ForjaKronita - Direitos Reservados</p>
     </footer>
- 
+
+    <div class="loja-fundo" id="loja-fundo"></div>
+    <aside class="loja-painel" id="loja-painel" aria-label="Sua loja" aria-hidden="true">
+        <div class="loja-topo">
+            <h2>Sua loja</h2>
+            <button type="button" class="loja-fechar" id="loja-fechar" aria-label="Fechar">✕</button>
+        </div>
+
+        <ul class="loja-lista" id="loja-lista"></ul>
+        <p class="loja-vazia" id="loja-vazia">Nenhuma relíquia ainda. Escolha uma e deixe a kunai buscá-la.</p>
+
+        <div class="loja-rodape">
+            <div class="loja-total"><span>Total</span><strong id="loja-total">R$ 0,00</strong></div>
+            <button type="button" class="loja-limpar" id="loja-limpar">Cancelar tudo</button>
+        </div>
+    </aside>
+    
     <script src="./src/script/script.js"></script>
 </body>
 </html>

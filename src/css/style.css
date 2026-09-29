@@ -128,7 +128,98 @@ nav ul li a:hover{
 nav ul li a:hover::after{
     transform: scaleX(1);
 }
- 
+
+.carrinho{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    color: var(--gold);
+    background: transparent;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.carrinho:hover{
+    color: var(--btn-color);
+    border-color: var(--btn-color);
+}
+
+.carrinho svg{
+    width: 24px;
+    height: 24px;
+}
+
+.carrinho-qtd{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--btn-color);
+    color: var(--bg-dark);
+    font: 700 0.75rem 'Cinzel', serif;
+}
+
+.carrinho.balanca{
+    animation: balancar-loja 0.4s;
+}
+
+@keyframes balancar-loja{
+    0%, 100%{ transform: rotate(0); }
+    25%{ transform: rotate(-14deg); }
+    75%{ transform: rotate(14deg); }
+}
+
+/* KUNAI + CORRENTE */
+.gancho{
+    --rot-kunai: 0deg;          /* ajuste se a ponta da sua imagem não apontar para a direita */
+    position: fixed;
+    z-index: 200;
+    width: 0;
+    height: 6px;
+    margin-top: -3px;
+    transform-origin: 0 50%;
+    pointer-events: none;
+}
+
+.corrente{
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    background: repeating-linear-gradient(90deg, #c9a35c 0 6px, #6b4a1c 6px 10px);
+    box-shadow: 0 0 8px var(--btn-color);
+}
+
+.kunai-voo{
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    width: 48px;
+    height: 48px;
+    max-width: none;
+    object-fit: contain;
+    transform: translateY(-50%) rotate(var(--rot-kunai));
+}
+
+.produto-voo{
+    position: fixed;
+    z-index: 199;
+    max-width: none;
+    object-fit: contain;
+    pointer-events: none;
+    filter: drop-shadow(0 0 12px var(--btn-color));
+}
+
 .menu-hamburguer{
     display: none;
     flex-direction: column;
@@ -445,4 +536,168 @@ footer{
     html{ scroll-behavior: auto; }
     .fogo i,
     .logo:hover h1{ animation: none; }
+}
+
+Loja · CSS
+/* PAINEL DA LOJA */
+.loja-fundo{
+    position: fixed;
+    inset: 0;
+    z-index: 290;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+ 
+.loja-fundo.aberto{
+    opacity: 1;
+    visibility: visible;
+}
+ 
+.loja-painel{
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    width: min(400px, 100%);
+    height: 100%;
+    background: var(--bg-card);
+    border-left: 2px solid var(--gold);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s, visibility 0.35s;
+}
+ 
+.loja-painel.aberto{
+    transform: translateX(0);
+    visibility: visible;
+}
+ 
+.loja-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: var(--header-bg);
+    border-bottom: 2px solid var(--gold);
+}
+ 
+.loja-topo h2{
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+}
+ 
+.loja-fechar{
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    background: transparent;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+ 
+.loja-fechar:hover{
+    color: var(--btn-color);
+    border-color: var(--btn-color);
+}
+ 
+.loja-lista{
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+ 
+.loja-vazia{
+    padding: 40px 24px;
+    text-align: center;
+    opacity: 0.7;
+}
+ 
+.loja-vazia.oculta{
+    display: none;
+}
+ 
+.loja-item{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px;
+    background: var(--bg-dark);
+    border: 1px solid var(--header-bg);
+    border-radius: 8px;
+}
+ 
+.loja-item img{
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: #000;
+    border-radius: 6px;
+}
+ 
+.loja-info{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+ 
+.loja-info strong{
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+}
+ 
+.loja-info span{
+    color: var(--gold);
+    font-weight: 700;
+}
+ 
+.loja-cancelar,
+.loja-limpar{
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--text-color);
+    background: transparent;
+    border: 2px solid #b3322f;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+ 
+.loja-cancelar:hover,
+.loja-limpar:hover{
+    background: #b3322f;
+}
+ 
+.loja-rodape{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: var(--header-bg);
+    border-top: 2px solid var(--gold);
+}
+ 
+.loja-total{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Cinzel', serif;
+}
+ 
+.loja-total strong{
+    font-size: 1.4rem;
+    color: var(--gold);
 }
