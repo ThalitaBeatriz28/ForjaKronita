@@ -50,7 +50,7 @@ header{
     align-items: center;
     padding: 12px 5%;
     background: var(--header-bg);
-    border-bottom: 3px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
  
@@ -150,32 +150,12 @@ nav ul li a:hover::after{
 .open span:nth-child(2){ opacity: 0; }
 .open span:nth-child(3){ transform: rotate(-45deg) translate(7px, -7px); }
  
-/* TÍTULOS DAS SEÇÕES */
-.sobre h2,
-.produtos h2{
-    font-size: 2.2rem;
-    letter-spacing: 1px;
-    text-align: center;
-    color: var(--gold);
-    margin-bottom: 10px;
-}
- 
+
 .produtos h2{
     font-family: 'Cinzel', serif;
+    margin-bottom: 20px;
 }
  
-/* fio dourado embaixo de cada título */
-.sobre h2::after,
-.produtos h2::after{
-    content: "";
-    display: block;
-    width: 90px;
-    height: 3px;
-    margin: 14px auto 0;
-    background: var(--linear-bg);
-    border-radius: 3px;
-}
-
 .sobre-fogo{
     position: relative;
     overflow: hidden;
@@ -202,7 +182,17 @@ nav ul li a:hover::after{
  
 .sobre h2,
 .sobre p{
-    text-shadow: 0 2px 6px #000, 0 0 16px #000;
+    filter: url(#calor);                       /* o texto ondula como ar quente */
+    animation: arder 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes arder{
+    from{
+        text-shadow: 0 0 6px #ff9a1f, 0 0 14px #e8871e, 0 -4px 22px #b3320f, 0 2px 6px #000;
+    }
+    to{
+        text-shadow: 0 0 10px #ffd27a, 0 0 24px #ff7a1a, 0 -8px 34px #d9420f, 0 2px 6px #000;
+    }
 }
  
 /* o fogo se dissolve suavemente na cor do fundo da página */
@@ -262,7 +252,11 @@ nav ul li a:hover::after{
     max-width: 1200px;
     margin: 0 auto;
 }
- 
+.produtos h2{
+    font-family: 'Cinzel', serif;
+    text-align: center;
+}
+
 .produtos-sub{
     text-align: center;
     max-width: 50ch;
@@ -285,12 +279,15 @@ nav ul li a:hover::after{
     background: var(--bg-card);
     border: 1px solid var(--header-bg);
     border-top: 4px solid var(--cor);
-    box-shadow: inset 0 0 0 5px var(--bg-dark), inset 0 0 0 6px var(--header-bg);
     transition: box-shadow 0.25s;
+    border-radius: 6%;
+    overflow: hidden;
 }
  
 .card:hover{
-    box-shadow: inset 0 0 0 5px var(--bg-dark), inset 0 0 0 6px var(--cor);
+    box-shadow:
+        0 0 12px color-mix(in srgb, var(--cor) 55%, transparent),
+        0 0 36px color-mix(in srgb, var(--cor) 30%, transparent);
 }
  
 /* cor de cada reino, dentro da sua paleta */
@@ -302,7 +299,7 @@ nav ul li a:hover::after{
 .card[data-reino="mileena"] { --cor: #9370DB ; }
 
 .card-imagem {
-    height: 170px;
+    height: 190px;
     width: 100%; /* Garante que o container ocupa toda a largura */
     overflow: hidden; /* Corta o excesso da imagem ao fazer zoom no hover */
     display: flex;
@@ -311,22 +308,25 @@ nav ul li a:hover::after{
     background: radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--cor) 35%, transparent), transparent 70%);
 }
 
-.card:hover .card-imagem {
-    transform: scale(1.06);
-}
-
 .card-imagem img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Faz a imagem preencher tudo sem distorcer */
+    object-fit: cover; 
+    object-position: center;
     display: block;
+    -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 55%, transparent 100%);
+        mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 55%, transparent 100%);
+    transition: filter 0.3s; 
 }
 
 .card:hover .card-imagem img {
-    transform: scale(0.85); /* Diminui a imagem */
-    filter: drop-shadow(0 0 18px var(--cor));
+    animation: brilhar 1.6s ease-in-out infinite alternate;
 }
 
+@keyframes brilhar{
+    from{ filter: drop-shadow(0 0 8px var(--cor)); }
+    to{   filter: drop-shadow(0 0 16px var(--cor)) drop-shadow(0 0 32px var(--cor)); }
+}
 .card-corpo{
     display: flex;
     flex-direction: column;

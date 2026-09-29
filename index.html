@@ -37,7 +37,14 @@
                 </feTurbulence>
                 <feDisplacementMap in="SourceGraphic" in2="ruido" scale="80"/>
             </filter>
+            <filter id="calor" x="-5%" y="-10%" width="110%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.06" numOctaves="2" seed="2" result="r">
+                    <animate attributeName="baseFrequency" dur="3s" values="0.01 0.06;0.015 0.09;0.01 0.06" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="r" scale="6"/>
+            </filter>
         </svg>
+        
         <canvas id="brasas"></canvas>
         <div class="fogo" id="fogo"></div>
  
@@ -112,7 +119,7 @@
                 <div class="card-corpo">
                     <span class="card-reino">Outworld</span>
                     <h3 class="card-titulo">Leque da Kitana</h3>
-                    <p class="card-descricao">Par de leques de aço decorativo, afiados só no visual.</p>
+                    <p class="card-descricao">Leques de aço decorativo, afiados só no visual.</p>
                     <div class="card-rodape">
                         <span class="card-preco">R$ 219</span>
                         <button class="btn-comprar" type="button">Comprar</button>
