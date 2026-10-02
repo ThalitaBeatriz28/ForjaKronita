@@ -60,38 +60,6 @@
         </div>
     </section>
 
-    <!-- SOBRE -->
-     <section id="sobre" class="sobre-fogo">
-        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-            <filter id="chama" x="-20%" y="-30%" width="140%" height="160%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="4" result="ruido">
-                    <animate attributeName="baseFrequency" dur="7s" values="0.012 0.03;0.017 0.05;0.012 0.03" repeatCount="indefinite"/>
-                </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="80"/>
-            </filter>
-            <filter id="calor" x="-5%" y="-10%" width="110%" height="120%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.06" numOctaves="2" seed="2" result="r">
-                    <animate attributeName="baseFrequency" dur="3s" values="0.01 0.06;0.015 0.09;0.01 0.06" repeatCount="indefinite"/>
-                </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="r" scale="6"/>
-            </filter>
-        </svg>
-
-        <canvas id="brasas"></canvas>
-        <div class="fogo" id="fogo"></div>
- 
-        <div class="sobre">
-            <h2>Sobre a ForjaKronita</h2>
-            <p>
-                Na ForjaKronita, cada peça é forjada com a mesma dedicação de um mestre
-                ferreiro lendário. Trabalhamos com colecionáveis e itens temáticos
-                inspirados em guerreiros, sombras e guardiões de aço, unindo artesanato
-                e paixão por universos épicos.
-            </p>
-        </div>
-    </section>
-    
-    <main>
          <!-- PRODUTOS -->
     <section id="produtos" class="produtos">
         <h2>Nossas relíquias</h2>
@@ -191,8 +159,40 @@
  
         </div>
     </section>
- 
     </main>
+
+    <!-- SOBRE -->
+     <section id="sobre" class="sobre-fogo">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+            <filter id="chama" x="-20%" y="-30%" width="140%" height="160%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="4" result="ruido">
+                    <animate attributeName="baseFrequency" dur="7s" values="0.012 0.03;0.017 0.05;0.012 0.03" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="ruido" scale="80"/>
+            </filter>
+            <filter id="calor" x="-5%" y="-10%" width="110%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.06" numOctaves="2" seed="2" result="r">
+                    <animate attributeName="baseFrequency" dur="3s" values="0.01 0.06;0.015 0.09;0.01 0.06" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="r" scale="6"/>
+            </filter>
+        </svg>
+
+        <canvas id="brasas"></canvas>
+        <div class="fogo" id="fogo"></div>
+ 
+        <div class="sobre">
+            <h2>Sobre a ForjaKronita</h2>
+            <p>
+                Na ForjaKronita, cada peça é forjada com a mesma dedicação de um mestre
+                ferreiro lendário. Trabalhamos com colecionáveis e itens temáticos
+                inspirados em guerreiros, sombras e guardiões de aço, unindo artesanato
+                e paixão por universos épicos.
+            </p>
+        </div>
+    </section>
+    
+    <main>
     
     <footer class="rodape">
         <img class="rodape-dragao" src="./src/assets/dragao.jpg" alt="" aria-hidden="true">
