@@ -29,8 +29,17 @@ for (let k = 0; k < 11; k++) {
     `;
     fogo.appendChild(chama);
 }
+
+const slides = document.querySelectorAll(".capa-slide");
+let atual = 0;
  
-// 2) brasas: faíscas que sobem balançando (desligado se a pessoa pediu menos movimento)
+setInterval(() => {
+    slides[atual].classList.remove("on");
+    atual = (atual + 1) % slides.length;
+    slides[atual].classList.add("on");
+}, 3500);
+ 
+// Faíscas que sobem balançando (desligado se a pessoa pediu menos movimento)
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const canvas = document.getElementById("brasas");
     const ctx = canvas.getContext("2d");

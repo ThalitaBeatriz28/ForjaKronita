@@ -185,6 +185,66 @@ nav ul li a:hover::after{
     75%{ transform: rotate(14deg); }
 }
 
+.capa{
+    position: relative;
+    height: calc(100vh - 104px);
+    min-height: 480px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #2a0f06, var(--bg-dark) 75%);
+}
+ 
+/* brilho de fogo no rasgo */
+.capa-fenda{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 40%, #e8871e 50%, transparent 60%);
+    filter: blur(16px);
+}
+ 
+/* as duas metades: o rasgo é o clip-path */
+.capa-lado{
+    position: absolute;
+    inset: 0;
+    filter: drop-shadow(0 0 2px var(--gold)) drop-shadow(0 0 12px #000);
+}
+.capa-esq{
+    background: radial-gradient(circle at 25% 50%, #4a2a18, var(--bg-card) 75%);
+    clip-path: polygon(0 0, 46% 0, 52% 8%, 45% 17%, 53% 27%, 46% 38%, 52% 48%, 45% 58%, 53% 69%, 46% 80%, 52% 90%, 47% 100%, 0 100%);
+}
+.capa-dir{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 50%;
+    background: linear-gradient(rgba(18, 12, 8, .8), rgba(18, 12, 8, .7)), url("../assets/dragao.jpg") center / cover;
+    clip-path: polygon(49% 0, 100% 0, 100% 100%, 50% 100%, 55% 90%, 49% 80%, 56% 69%, 48% 58%, 55% 48%, 49% 38%, 56% 27%, 48% 17%, 55% 8%);
+}
+ 
+/* fotos */
+.capa-slide{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 56%;    
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s;
+}
+.capa-slide.on{ opacity: 1; }
+ 
+/* texto */
+.capa-texto{ text-align: center; }
+.capa h1{
+    font: 800 clamp(2.2rem, 5vw, 5rem)/1 'Cinzel', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 25px rgba(232, 135, 30, .6);
+}
+.capa h1 span{ position: relative; display: table; margin: 0 auto; }
+.forja{ color: #e3b865; }
+.kronita{ color: var(--btn-color); }
+
 /* KUNAI + CORRENTE */
 .gancho{
     --rot-kunai: 0deg;          /* ajuste se a ponta da sua imagem não apontar para a direita */
