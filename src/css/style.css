@@ -317,7 +317,10 @@ nav ul li a:hover::after{
 .sobre-fogo{
     position: relative;
     overflow: hidden;
-    padding: 20px 0 300px;   /* espaço embaixo para as chamas */
+    min-height: calc(70vh - 104px);   
+    display: flex;
+    align-items: center;               
+    justify-content: center;           
     background: linear-gradient(to top, #5c1b07 0, #2b1006 40%, var(--bg-dark) 100%);
 }
  
@@ -333,7 +336,7 @@ nav ul li a:hover::after{
 }
  
 .sobre p{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-top: 25px;
     margin-bottom: 20px;
 }
