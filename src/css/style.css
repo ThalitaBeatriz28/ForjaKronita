@@ -187,20 +187,27 @@ nav ul li a:hover::after{
 
 .capa{
     position: relative;
-    height: calc(100vh - 104px);
+    height: clamp(480px, 85vh, 900px);   /* mais alta = menos corte da foto */
     min-height: 480px;
     overflow: hidden;
     background: radial-gradient(ellipse at center, #2a0f06, var(--bg-dark) 75%);
+    box-shadow: 1px 1px 10px var(--gold);
+    border: 1.5px solid var(--gold);
 }
- 
-/* brilho de fogo no rasgo */
+
+/* brilho de fogo atrás do rasgo */
 .capa-fenda{
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, transparent 40%, #e8871e 50%, transparent 60%);
     filter: blur(16px);
+    animation: pulsa 2.2s ease-in-out infinite alternate;
 }
- 
+@keyframes pulsa{
+    from{ opacity: .55; }
+    to{ opacity: 1; }
+}
+
 /* as duas metades: o rasgo é o clip-path */
 .capa-lado{
     position: absolute;
@@ -212,32 +219,40 @@ nav ul li a:hover::after{
     background: radial-gradient(circle at 25% 50%, #4a2a18, var(--bg-card) 75%);
     clip-path: polygon(0 0, 46% 0, 52% 8%, 45% 17%, 53% 27%, 46% 38%, 52% 48%, 45% 58%, 53% 69%, 46% 80%, 52% 90%, 47% 100%, 0 100%);
 }
+
 .capa-dir{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 50%;
+    padding-left: 58%;
+    padding-right: 3%;
     background: linear-gradient(rgba(18, 12, 8, .8), rgba(18, 12, 8, .7)), url("../assets/dragao.jpg") center / cover;
     clip-path: polygon(49% 0, 100% 0, 100% 100%, 50% 100%, 55% 90%, 49% 80%, 56% 69%, 48% 58%, 55% 48%, 49% 38%, 56% 27%, 48% 17%, 55% 8%);
 }
- 
-/* fotos */
-.capa-slide{
+
+/* ---------- fotos (esquerda): sempre preenchendo ---------- */
+.capa .capa-esq .capa-slide{
     position: absolute;
     left: 0;
     top: 0;
-    width: 56%;    
+    width: 56%;
     height: 100%;
+    max-width: none;
+    transform: none;
     object-fit: cover;
+    object-position: center 20%;   /* 0% = topo, 100% = base; 20% mantém o rosto */
     opacity: 0;
     transition: opacity 1s;
+    -webkit-mask-image: none;
+            mask-image: none;
 }
-.capa-slide.on{ opacity: 1; }
- 
-/* texto */
-.capa-texto{ text-align: center; padding-left: 14px;}
+.capa .capa-esq .capa-slide.on{ opacity: 1; }
+
+/* ---------- texto (direita) ---------- */
+.capa-texto{ text-align: center; padding-left: 1px; }
+
 .capa h1{
-    font: 800 clamp(2.2rem, 5vw, 5rem)/1 'Cinzel', serif;
+    font: 800 clamp(1.5rem, 4.2vw, 5rem)/1 'Cinzel', serif;
     letter-spacing: 3px;
     text-transform: uppercase;
     text-shadow: 0 0 25px rgba(232, 135, 30, .6);
@@ -245,6 +260,68 @@ nav ul li a:hover::after{
 .capa h1 span{ position: relative; display: table; margin: 0 auto; }
 .forja{ color: #e3b865; }
 .kronita{ color: var(--btn-color); }
+
+/* ---------- fogo no rasgo ---------- */
+.capa-fogo{
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 0 5px #ff9a1f) drop-shadow(0 0 14px #e8590a) drop-shadow(0 0 28px rgba(232, 135, 30, .6));
+    animation: tremeluz 1.4s ease-in-out infinite alternate;
+}
+.capa-fogo i{
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(
+        46% 0, 52% 8%, 45% 17%, 53% 27%, 46% 38%, 52% 48%, 45% 58%, 53% 69%, 46% 80%, 52% 90%, 47% 100%,
+        50% 100%, 55% 90%, 49% 80%, 56% 69%, 48% 58%, 55% 48%, 49% 38%, 56% 27%, 48% 17%, 55% 8%, 49% 0
+    );
+    background: linear-gradient(0deg, #fff1b0, #ffb42e 30%, #e8590a 65%, #fff1b0);
+    background-size: 100% 140px;
+    animation: sobe 1.1s linear infinite;
+}
+@keyframes sobe{
+    to{ background-position: 0 -140px; }
+}
+@keyframes tremeluz{
+    0%   { opacity: .75; }
+    35%  { opacity: 1; }
+    70%  { opacity: .85; }
+    100% { opacity: 1; }
+}
+
+/* brasas subindo */
+.capa-brasas{
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 40%; width: 20%;
+    z-index: 3;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, #ffd27a 0 1.5px, transparent 2.5px),
+        radial-gradient(circle, #ff9a1f 0 1px,   transparent 2px),
+        radial-gradient(circle, #fff1b0 0 1px,   transparent 1.8px),
+        radial-gradient(circle, #ffb42e 0 1.2px, transparent 2.2px);
+    background-size: 97px 173px, 131px 211px, 83px 149px, 113px 191px;
+    background-position: 10px 0, 55px 40px, 30px 90px, 75px 20px;
+    animation: brasas 5s linear infinite;
+    -webkit-mask-image: linear-gradient(0deg, transparent, #000 25%, #000 70%, transparent);
+            mask-image: linear-gradient(0deg, transparent, #000 25%, #000 70%, transparent);
+}
+@keyframes brasas{
+    to{ background-position: 10px -173px, 55px -171px, 30px -59px, 75px -171px; }
+}
+
+/* ---------- tela estreita ---------- */
+@media (max-width: 600px){
+    .capa-dir{ padding-left: 62%; padding-right: 2%; }
+    .capa h1{ letter-spacing: 1px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .capa-fogo, .capa-fogo i, .capa-brasas, .capa-fenda{ animation: none; }
+}
 
 /* KUNAI + CORRENTE */
 .gancho{
