@@ -207,6 +207,7 @@ nav ul li a:hover::after{
     inset: 0;
     filter: drop-shadow(0 0 2px var(--gold)) drop-shadow(0 0 12px #000);
 }
+
 .capa-esq{
     background: radial-gradient(circle at 25% 50%, #4a2a18, var(--bg-card) 75%);
     clip-path: polygon(0 0, 46% 0, 52% 8%, 45% 17%, 53% 27%, 46% 38%, 52% 48%, 45% 58%, 53% 69%, 46% 80%, 52% 90%, 47% 100%, 0 100%);
@@ -234,7 +235,7 @@ nav ul li a:hover::after{
 .capa-slide.on{ opacity: 1; }
  
 /* texto */
-.capa-texto{ text-align: center; }
+.capa-texto{ text-align: center; padding-left: 14px;}
 .capa h1{
     font: 800 clamp(2.2rem, 5vw, 5rem)/1 'Cinzel', serif;
     letter-spacing: 3px;
@@ -408,6 +409,25 @@ nav ul li a:hover::after{
 }
  
 /* PRODUTOS / CARDS */
+#Title-produtos{
+    font-family: 'Cinzel', cursive;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-shadow:
+        0 0 10px var(--btn-color),
+        0 0 22px #b3320f,
+        0 3px 6px #000;
+}
+
+#Title-produtos:hover{
+    animation: acender 0.5s forwards;
+    text-transform: scale(5px); 
+    
+}
+
 .produtos{
     padding: 60px 5%;
     max-width: 1200px;
